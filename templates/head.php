@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Guess the number</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Leaderboard</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Profile</a>
+                </li>
             </ul>
         </div>
-</div>
+    </div>
 </nav>
+
+<!-- start of the middle form -->
+<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4" style="width: 100%; max-width: 600px;">
