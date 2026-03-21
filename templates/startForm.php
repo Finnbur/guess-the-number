@@ -22,8 +22,8 @@
         </div>
 
         <div class="mb-3 flex-fill">
-            <label for="time" class="form-label">Time per guess (s)</label>
-            <input type="number" class="form-control" name="time" value="<?php echo $_SESSION['time'] ?>" required>
+            <label for="timePerGuess" class="form-label">Time per guess (s)</label>
+            <input type="number" class="form-control" name="timePerGuess" value="<?php echo $_SESSION['timePerGuess'] ?>" required>
         </div>
     </div>
 

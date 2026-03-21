@@ -4,7 +4,7 @@ require_once 'inc/functions.php';
 init();
 handleRequest();
 
-require_once 'templates/head.php';
+require_once 'templates/partials/head.php';
 
 // dump($_SESSION);
 // dump($_POST);
@@ -19,4 +19,4 @@ if ($_SESSION['gameStarted'] === false) {
     }
 }
 
-require_once 'templates/foot.php';
+require_once 'templates/partials/foot.php';

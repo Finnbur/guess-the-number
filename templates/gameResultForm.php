@@ -1,8 +1,8 @@
 <?php
 if($_SESSION['gameWon'] == true) {
-    echo "<h1>GAME WON</h1>";
+    echo "<div class='text-center mb-4'><h1><span class='badge bg-success rounded-pill'>GAME WON</span></h1></div>";
 } else {
-    echo "<h1>GAME LOST</h1>";
+    echo "<div class='text-center mb-4'><h1><span class='badge bg-danger rounded-pill'>GAME LOST</span></h1></div>";
 }
 ?>
 
@@ -21,18 +21,6 @@ if($_SESSION['gameWon'] == true) {
             Reset Game
         </button>
 
-        <h3 class="fw-semibold">Guesses</h3>
-        <div class="list-group list-group-flush">
-            <?php if (!empty($_SESSION['guesses'])): ?>
-                <?php foreach ($_SESSION['guesses'] as $index => $guess): ?>
-                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
-                        <span>Guess <?php echo $index + 1; ?>: <?php echo htmlspecialchars($guess['guess']); ?></span>
-                        <span class="badge bg-<?php echo $guess['type']; if($guess['type'] == "warning") { echo " text-dark"; }?> rounded-pill"><?php echo htmlspecialchars($guess['message']) ?></span>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="text-muted small">No guesses done.</div>
-            <?php endif; ?>
-        </div>
+        <?php require_once 'partials/guessesList.php'; ?>
     </div>
 </form>

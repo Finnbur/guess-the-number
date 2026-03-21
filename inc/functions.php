@@ -7,7 +7,7 @@ function init() {
         $_SESSION['maxGuesses'] = 10;
         $_SESSION['guesses'] = [];
         $_SESSION['secretNumber'] = null;
-        $_SESSION['time'] = 15;
+        $_SESSION['timePerGuess'] = 15;
         $_SESSION['min'] = 1;
         $_SESSION['max'] = 100;
     }
@@ -38,6 +38,8 @@ function handleStart() {
     $min = $_POST['min'];
     $max = $_POST['max'];
     $maxGuesses = $_POST['maxGuesses'];
+    $timePerGuess = $_POST['timePerGuess'];
+    $_SESSION['time'] = time();
     
     if($min >= $max) {
         return;
@@ -46,6 +48,7 @@ function handleStart() {
     $_SESSION['min'] = $min;
     $_SESSION['max'] = $max;
     $_SESSION['maxGuesses'] = $maxGuesses;
+    $_SESSION['timePerGuess'] = $timePerGuess;
     $_SESSION['secretNumber'] = mt_rand($min, $max);
     $_SESSION['guesses'] = [];
     $_SESSION['gameStarted'] = true;
