@@ -6,5 +6,13 @@
         <p>© 2026 Guess the number</p>
     </div>
 </footer>
+
+<!-- modals -->
+<?php
+if(!$_SESSION['loggedIn']) {
+    require_once 'loginAndRegisterModal.php'; 
+} 
+?>
+
 </body>
 </html>

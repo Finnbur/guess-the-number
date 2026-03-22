@@ -10,7 +10,10 @@ function init() {
         $_SESSION['timePerGuess'] = 15;
         $_SESSION['min'] = 1;
         $_SESSION['max'] = 100;
+        $_SESSION['loggedIn'] = false;
     }
+    
+    handleRequest();
 }
 
 function handleRequest() {
@@ -28,6 +31,15 @@ function handleRequest() {
                     break;
                 case 'reset':
                     handleReset();
+                    break;
+                case 'login':
+                    handleLogin();
+                    break;
+                case 'register':
+                    handleRegister();
+                    break;
+                case 'logout':
+                    handleLogout();
                     break;
             }
         }
@@ -59,6 +71,7 @@ function handleStart() {
 function handleGuess() {
     $guess = $_POST['guess'];
     $secret = $_SESSION['secretNumber'];
+    $_SESSION['time'] = time();
 
     if($guess < $secret) {
         respond("Your guess is TOO LOW", "primary");
@@ -79,13 +92,10 @@ function handleGuess() {
 }
 
 function handleAgain() {
-    unset($_SESSION['guesses']);
-    unset($_SESSION['response']);
-    unset($_SESSION['gameWon']);
+    resetGame();
 
+    //Reset variables
     $_SESSION['guesses'] = [];
-
-    // Get new random number
     $_SESSION['secretNumber'] = mt_rand($_SESSION['min'], $_SESSION['max']);
     
     reload();
@@ -93,12 +103,31 @@ function handleAgain() {
 
 function handleReset() {
     $_SESSION['gameStarted'] = false;
+    resetGame();
+    
+    reload();
+}
+
+function handleLogin() {
+
+}
+
+function handleRegister() {
+
+}
+
+function handleLogout() {
+    $_SESSION['loggedIn'] = false;
+    unset($_SESSION['userId']);
+
+    reload();
+}
+
+function resetGame() {
     unset($_SESSION['secretNumber']);
     unset($_SESSION['guesses']);
     unset($_SESSION['response']);
     unset($_SESSION['gameWon']);
-    
-    reload();
 }
 
 function reload($location = null, $statusCode = 302, $exitAfter = true) {

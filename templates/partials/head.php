@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Number</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <link rel="stylesheet" href="css/style.css"> -->
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Guess the number</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Play</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Leaderboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="index.php" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+                <img width="48" height="48" src="https://img.icons8.com/?size=100&id=116653&format=png&color=FFFFFF" alt="2-circle"/>
+            </a>
+
+            <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-1">
+                <li><a href="index.php" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Leaderboard</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Profile</a></li>
             </ul>
+
+            <div class="text-end">
+                <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign-up</button>
+            </div>
         </div>
     </div>
-</nav>
+</header>
 
 <!-- start of the middle form -->
 <div class="container min-vh-100 d-flex justify-content-center align-items-center">

@@ -2,7 +2,6 @@
 require_once 'inc/functions.php';
 
 init();
-handleRequest();
 
 require_once 'templates/partials/head.php';
 

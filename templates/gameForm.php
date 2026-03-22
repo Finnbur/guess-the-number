@@ -2,7 +2,6 @@
 // TODO: change this to be at a better place
 if (time() - $_SESSION['time'] >= $_SESSION['timePerGuess']) {
     $_SESSION['gameWon'] = false;
-    reload();
 }
 
 $remaining = $_SESSION['timePerGuess'] - (time() - $_SESSION['time']);
@@ -108,10 +107,10 @@ $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
         bar.classList.remove("bg-success", "bg-warning", "bg-danger");
         document.getElementById("timeText").classList.remove("bg-success", "bg-warning", "bg-danger");
 
-        if (percentage < 30) {
+        if (percentage < 20) {
             bar.classList.add("bg-danger");
             document.getElementById("timeText").classList.add("bg-danger");
-        } else if (percentage < 60) {
+        } else if (percentage < 40) {
             bar.classList.add("bg-warning");
             document.getElementById("timeText").classList.add("bg-warning");
         } else {
