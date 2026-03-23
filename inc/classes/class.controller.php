@@ -10,6 +10,46 @@ class Controller {
         $this->handleRequest();
     }
 
+    public function router() {
+        $this->checkTimer();
+        $page = $_GET['page'] ?? 'game';
+
+        switch ($page) {
+            case 'leaderboard':
+                $this->leaderboard();
+                break;
+
+            case 'profile':
+                $this->profile();
+                break;
+
+            case 'game':
+            default:
+                $this->game();
+                break;
+        }
+    }
+
+    private function leaderboard() {
+        require_once 'templates/leaderboard.php';
+    }
+
+    private function profile() {
+        require_once 'templates/profile.php';
+    }
+
+    private function game() {
+        if ($_SESSION['gameStarted'] === false) {
+            require_once 'templates/startForm.php';
+        } else {
+            if(!isset($_SESSION['gameWon'])) {
+                require_once 'templates/gameForm.php';
+            } else {
+                require_once 'templates/gameResultForm.php';
+            }
+        }
+    }
+
     public function handleRequest() {
         if($_SERVER['REQUEST_METHOD'] === "POST") {
             if($_POST['action']) {
@@ -36,6 +76,14 @@ class Controller {
                         $this->auth->handleLogout();
                         break;
                 }
+            }
+        }
+    }
+
+    public function checkTimer() {
+        if (isset($_SESSION['time'], $_SESSION['timePerGuess'])) {
+            if (time() - $_SESSION['time'] >= $_SESSION['timePerGuess']) {
+                $this->game->gameEnd(false);
             }
         }
     }

@@ -18,8 +18,7 @@
 
             <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-1">
                 <li><a href="index.php" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Leaderboard</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Profile</a></li>
+                <li><a href="index.php?page=leaderboard" class="nav-link px-2 text-white">Leaderboard</a></li>
             </ul>
 
             <div class="text-end">
@@ -27,9 +26,19 @@
                     <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
                     <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign-up</button>
                 <?php }else{ ?>
-                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                        <button type="submit" name="action" value="logout" class="btn btn-secondary">Logout</button>
-                    </form>
+                    <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                                <li><a class="dropdown-item" href="index.php?page=profile">Profile</a></li>
+                                <li>
+                                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                                        <button type="submit" name="action" value="logout" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 <?php } ?>
             </div>
         </div>

@@ -10,7 +10,8 @@
 <!-- modals -->
 <?php
 if(!$_SESSION['loggedIn']) {
-    require_once 'loginAndRegisterModal.php'; 
+    require_once 'loginModal.php';
+    require_once 'registerModal.php'; 
 } 
 ?>
 

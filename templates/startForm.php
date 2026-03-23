@@ -1,6 +1,6 @@
 
 <h3>Start Game</h3>
-<p class="text-muted small mb-4">To save scores log in</p>
+<p class="text-muted small mb-4">Login to save scores</p>
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="d-flex gap-2 mb-2">

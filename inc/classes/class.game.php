@@ -57,18 +57,18 @@ class Game {
         $_SESSION['time'] = time();
 
         if($guess < $secret) {
-            respond("Your guess is TOO LOW", "primary");
+            respond("Your guess is TOO LOW", "primary", "game");
             $this->addGuess($guess, "TOO LOW", "primary");
         } elseif($guess > $secret) {
-            respond("Your guess is TOO HIGH", "warning");
+            respond("Your guess is TOO HIGH", "warning", "game");
             $this->addGuess($guess, "TOO HIGH", "warning");
         } else {
-            $_SESSION['gameWon'] = true;
             $this->addGuess($guess, "WIN", "success");
+            $this->gameEnd(true);
         }
 
         if(count($_SESSION['guesses']) >= $_SESSION['maxGuesses']) {
-            $_SESSION['gameWon'] = false;
+            $this->gameEnd(false);
         }
 
         reload();
@@ -97,8 +97,16 @@ class Game {
         unset($_SESSION['guesses']);
         unset($_SESSION['response']);
         unset($_SESSION['gameWon']);
+        unset($_SESSION['time']);
+        unset($_SESSION['startTime']);
+        unset($_SESSION['endTime']);
     }
     public function addGuess($guess, $message, $type) {
         $_SESSION['guesses'][] = ['guess' => $guess, 'message' => $message, 'type' => $type];
+    }
+
+    public function gameEnd($gameWon) {
+        $_SESSION['gameWon'] = $gameWon;
+        $_SESSION['endTime'] = time();
     }
 }

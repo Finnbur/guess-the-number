@@ -8,9 +8,30 @@ if($_SESSION['gameWon'] == true) {
 
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <!-- Guesses -->
-    <div class="list-group list-group-flush">
-        <h3><?php echo count($_SESSION['guesses']); ?>/<?php echo $_SESSION['maxGuesses']; ?> Guesses</h3>
+    <div class="row align-items-center mb-4 g-3">
+        <!-- amount of Guesses -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <span class="fw-semibold">Guesses</span>
+                    <span class="badge bg-primary fs-6">
+                        <?php echo count($_SESSION['guesses']); ?> / <?php echo $_SESSION['maxGuesses']; ?>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Time it took -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <span class="fw-semibold">Time </span>
+                    <span id="timeText" class="badge bg-success fs-6">
+                        <?php echo $_SESSION['endTime'] - $_SESSION['startTime']; ?>s
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="d-grid gap-2">

@@ -15,8 +15,8 @@ function reload($location = null, $statusCode = 302, $exitAfter = true) {
     }
 }
 
-function respond($message, $type = 'info') {
-    $_SESSION['response'] = ['message' => $message, 'type' => $type];
+function respond($message, $type = 'info', $location) {
+    $_SESSION['response'] = ['message' => $message, 'type' => $type, 'location' => $location];
 }
 
 function dump($data) {

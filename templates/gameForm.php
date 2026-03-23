@@ -1,9 +1,5 @@
 <?php
-// TODO: change this to be at a better place
-if (time() - $_SESSION['time'] >= $_SESSION['timePerGuess']) {
-    $_SESSION['gameWon'] = false;
-}
-
+// TODO: maybe change this to be at a better place
 $remaining = $_SESSION['timePerGuess'] - (time() - $_SESSION['time']);
 $remaining = max(0, min($_SESSION['timePerGuess'], $remaining));
 $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
@@ -18,7 +14,7 @@ $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <!-- response -->
-    <?php if(isset($_SESSION['response'])): ?>
+    <?php if(isset($_SESSION['response']) && $_SESSION['response']['location'] == "game"): ?>
         <div class="alert alert-<?php echo $_SESSION['response']['type']; ?> text-center">
             <?php echo htmlspecialchars($_SESSION['response']['message']); ?>
         </div>
