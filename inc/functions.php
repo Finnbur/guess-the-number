@@ -49,6 +49,7 @@ function handleRequest() {
 function handleStart() {
     $min = $_POST['min'];
     $max = $_POST['max'];
+    $_SESSION['startTime'] = time();
     $maxGuesses = $_POST['maxGuesses'];
     $timePerGuess = $_POST['timePerGuess'];
     $_SESSION['time'] = time();
@@ -95,6 +96,8 @@ function handleAgain() {
     resetGame();
 
     //Reset variables
+    $_SESSION['time'] = time();
+    $_SESSION['startTime'] = time();
     $_SESSION['guesses'] = [];
     $_SESSION['secretNumber'] = mt_rand($_SESSION['min'], $_SESSION['max']);
     
@@ -109,7 +112,14 @@ function handleReset() {
 }
 
 function handleLogin() {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
+    if($username == 'admin' && $password == 'admin') {
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['userId'] = 1;
+        reload();
+    }
 }
 
 function handleRegister() {

@@ -9,15 +9,15 @@
         </div>
 
         <div class="modal-body">
-            <form>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <div class="mb-3">
-                    <label>Name</label>
-                    <input type="text" class="form-control">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" name="username">
                 </div>
 
                 <div class="mb-3">
-                    <label>Password</label>
-                    <input type="password" class="form-control">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" name="password">
                 </div>
 
                 <button type="submit" name="action" value="login" class="btn btn-primary w-100">Login</button>
@@ -52,7 +52,7 @@
         <div class="modal-body">
             <form>
                 <div class="mb-3">
-                    <label>Name</label>
+                    <label>Username</label>
                     <input type="text" class="form-control">
                 </div>
 

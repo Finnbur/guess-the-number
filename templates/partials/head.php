@@ -23,8 +23,14 @@
             </ul>
 
             <div class="text-end">
-                <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign-up</button>
+                <?php if(!$_SESSION['loggedIn']){ ?>
+                    <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign-up</button>
+                <?php }else{ ?>
+                    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <button type="submit" name="action" value="logout" class="btn btn-secondary">Logout</button>
+                    </form>
+                <?php } ?>
             </div>
         </div>
     </div>

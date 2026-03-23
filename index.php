@@ -1,12 +1,11 @@
 <?php
-require_once 'inc/functions.php';
-
-init();
+session_start();
+require_once 'inc/classes.inc.php';
 
 require_once 'templates/partials/head.php';
 
-// dump($_SESSION);
-// dump($_POST);
+dump($_SESSION);
+dump($_POST);
 
 if ($_SESSION['gameStarted'] === false) {
     require_once 'templates/startForm.php';
