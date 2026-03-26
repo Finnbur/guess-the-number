@@ -68,8 +68,8 @@ class Auth {
         $result = $db->run("INSERT INTO users (username, password) VALUES (:username, :password)", [':username' => $username, ':password' => $hash]);
 
         if ($result) {
-            $userId = $db->run("SELECT id FROM users WHERE username = :username", [':username' => $username])->fetch();
-            $this->loginUser($userId);
+            $user = $db->run("SELECT id FROM users WHERE username = :username", [':username' => $username])->fetch();
+            $this->loginUser($user->id);
 
             reload();
         }

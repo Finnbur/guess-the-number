@@ -11,7 +11,6 @@ class Controller {
     }
 
     public function router() {
-        $this->checkTimer();
         $page = $_GET['page'] ?? 'game';
 
         switch ($page) {
@@ -43,6 +42,7 @@ class Controller {
             require_once 'templates/startForm.php';
         } else {
             if(!isset($_SESSION['gameWon'])) {
+                $this->checkTimer();
                 require_once 'templates/gameForm.php';
             } else {
                 require_once 'templates/gameResultForm.php';

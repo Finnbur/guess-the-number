@@ -106,7 +106,18 @@ class Game {
     }
 
     public function gameEnd($gameWon) {
+        unset($_SESSION['time']);
         $_SESSION['gameWon'] = $gameWon;
         $_SESSION['endTime'] = time();
+        
+        if($_SESSION['loggedIn']) {
+            $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, userId) VALUES (:time, :guesses, :maxGuesses, :gameWon, :userId)", [
+                ':time' => $_SESSION['endTime'] - $_SESSION['startTime'],
+                ':guesses' => count($_SESSION['guesses']),
+                ':maxGuesses' => $_SESSION['maxGuesses'],
+                ':gameWon' => $gameWon ? 1 : 0,
+                ':userId' => $_SESSION['userId']
+            ]);
+        }
     }
 }
