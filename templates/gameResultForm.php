@@ -1,8 +1,12 @@
 <?php
 if($_SESSION['gameWon'] == true) {
-    echo "<div class='text-center mb-4'><h1><span class='badge bg-success rounded-pill'>GAME WON</span></h1></div>";
+    ?>
+        <div class='text-center mb-4'><h1><span class='badge bg-success rounded-pill'>GAME WON (<?php echo $_SESSION['score'] ?>)</span></h1></div>
+    <?php
 } else {
-    echo "<div class='text-center mb-4'><h1><span class='badge bg-danger rounded-pill'>GAME LOST</span></h1></div>";
+    ?>
+        <div class='text-center mb-4'><h1><span class='badge bg-danger rounded-pill'>GAME LOST</span></h1></div>
+    <?php
 }
 ?>
 

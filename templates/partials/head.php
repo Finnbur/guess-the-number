@@ -17,7 +17,7 @@
             </a>
 
             <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-1">
-                <li><a href="/guess-the-number/" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="/guess-the-number/" class="nav-link px-2 text-white">Home</a></li>
                 <li><a href="leaderboard" class="nav-link px-2 text-white">Leaderboard</a></li>
             </ul>
 

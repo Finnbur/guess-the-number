@@ -100,6 +100,7 @@ class Game {
         unset($_SESSION['time']);
         unset($_SESSION['startTime']);
         unset($_SESSION['endTime']);
+        unset($_SESSION['score']);
     }
     public function addGuess($guess, $message, $type) {
         $_SESSION['guesses'][] = ['guess' => $guess, 'message' => $message, 'type' => $type];
@@ -109,15 +110,56 @@ class Game {
         unset($_SESSION['time']);
         $_SESSION['gameWon'] = $gameWon;
         $_SESSION['endTime'] = time();
+
+        $timeTaken = $_SESSION['endTime'] - $_SESSION['startTime'];
+
+        $score = $this->calculateScore($gameWon, $timeTaken, count($_SESSION['guesses']), $_SESSION['maxGuesses']);
+
+        $_SESSION['score'] = $score;
         
         if($_SESSION['loggedIn']) {
-            $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, userId) VALUES (:time, :guesses, :maxGuesses, :gameWon, :userId)", [
-                ':time' => $_SESSION['endTime'] - $_SESSION['startTime'],
+            $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, minNumber, maxNumber, added, userId, score) VALUES (:time, :guesses, :maxGuesses, :gameWon, :minNumber, :maxNumber, :added, :userId, :score)", [
+                ':time' => $timeTaken,
                 ':guesses' => count($_SESSION['guesses']),
                 ':maxGuesses' => $_SESSION['maxGuesses'],
                 ':gameWon' => $gameWon ? 1 : 0,
+                ':minNumber' => $_SESSION['min'],
+                ':maxNumber' => $_SESSION['max'],
+                ':score' => $score,
+                ':added' => date('Y-m-d H:i:s'),
                 ':userId' => $_SESSION['userId']
             ]);
         }
+    }
+
+    public function calculateScore($gameWon, $time, $guessesUsed, $maxGuesses) {
+        if (!$gameWon) {
+            return 0;
+        }
+
+        // Correct range calculation
+        $range = $_SESSION['max'] - $_SESSION['min'];
+
+        // Normalize factors (0 → bad, 1 → good)
+        $guessEfficiency = ($maxGuesses - $guessesUsed + 1) / $maxGuesses;
+
+        // Bigger range = better (log to prevent huge numbers breaking score)
+        $rangeScore = log($range + 1);
+
+        // Fewer max guesses = harder → reward
+        $difficultyScore = 1 / $maxGuesses;
+
+        // Time penalty (smooth decay instead of harsh subtraction)
+        $timeScore = 1 / (1 + $time / 30); // adjust 30 to tune time importance
+
+        // Final weighted score
+        $score = (
+            ($guessEfficiency * 0.4) +
+            ($rangeScore * 0.2) +
+            ($difficultyScore * 0.2) +
+            ($timeScore * 0.2)
+        ) * 1000;
+
+        return max(0, round($score));
     }
 }

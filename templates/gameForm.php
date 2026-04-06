@@ -1,5 +1,4 @@
 <?php
-// TODO: maybe change this to be at a better place
 $remaining = $_SESSION['timePerGuess'] - (time() - $_SESSION['time']);
 $remaining = max(0, min($_SESSION['timePerGuess'], $remaining));
 $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
@@ -59,7 +58,7 @@ $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
 
     <!-- guess reset and play again buttons -->
     <div class="input-group input-group-lg mb-1">
-        <input type="number" class="form-control" id="guess" name="guess" placeholder="Guess here..." required autofocus>
+        <input type="number" class="form-control" id="guess" name="guess" min="<?php echo $_SESSION['min']; ?>" max="<?php echo $_SESSION['max']; ?>" placeholder="Guess here..." required autofocus>
         <button type="submit" name="action" value="guess" class="btn btn-primary px-4 fw-semibold">
             Guess
         </button>
