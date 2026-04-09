@@ -3,27 +3,18 @@
 class Game {
     private $db;
 
-    public $gameStarted = false;
-    public $maxGuesses = 10;
-    public $guesses = [];
-    public $secretNumber = null;
-    public $timePerGuess = 15;
-    public $min = 1;
-    public $max = 100;
-    public $loggedIn = false;
-
     public function __construct($db) {
         $this->db = $db;
 
         if(!isset($_SESSION['gameStarted'])) {
-            $_SESSION['gameStarted'] = $this->gameStarted;
-            $_SESSION['maxGuesses'] = $this->maxGuesses;
-            $_SESSION['guesses'] = $this->guesses;
-            $_SESSION['secretNumber'] = $this->secretNumber;
-            $_SESSION['timePerGuess'] = $this->timePerGuess;
-            $_SESSION['min'] = $this->min;
-            $_SESSION['max'] = $this->max;
-            $_SESSION['loggedIn'] = $this->loggedIn;
+            $_SESSION['gameStarted'] = false;
+            $_SESSION['maxGuesses'] = 10;
+            $_SESSION['guesses'] = [];
+            $_SESSION['secretNumber'] = null;
+            $_SESSION['timePerGuess'] = 15;
+            $_SESSION['min'] = 1;
+            $_SESSION['max'] = 100;
+            $_SESSION['loggedIn'] = false;
         }
     }
 
@@ -101,6 +92,7 @@ class Game {
         unset($_SESSION['startTime']);
         unset($_SESSION['endTime']);
         unset($_SESSION['score']);
+        unset($_SESSION['saveScore']);
     }
     public function addGuess($guess, $message, $type) {
         $_SESSION['guesses'][] = ['guess' => $guess, 'message' => $message, 'type' => $type];
@@ -122,7 +114,7 @@ class Game {
         }
     }
 
-    private function saveScore($timeTaken) {
+    public function saveScore($timeTaken) {
         $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, minNumber, maxNumber, added, userId, score) VALUES (:time, :guesses, :maxGuesses, :gameWon, :minNumber, :maxNumber, :added, :userId, :score)", [
                 ':time' => $timeTaken,
                 ':guesses' => count($_SESSION['guesses']),

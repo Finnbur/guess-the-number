@@ -28,11 +28,6 @@ class Auth {
             if (password_verify($password, $row['password'])) {
                 $this->loginUser($row['id']);
 
-                if ($_POST['action'] === 'loginSaveScore') {
-                    $timeTaken = $_SESSION['endTime'] - $_SESSION['startTime'];
-                    $this->game->saveScore($timeTaken);
-                }
-
                 reload();
             }
         }
@@ -41,8 +36,11 @@ class Auth {
         reload();
     }
 
-    public function handleLoginSaveScore() {
-        $_SESSION['loginSaveScore'] = true;
+    public function handleSaveScore() {
+        if(!isset($_SESSION['saveScore']) && $_SESSION['loggedIn'] == false || $_SESSION['saveScore'] == true) {
+            $_SESSION['saveScore'] = true;
+            respond("You can now login or sign-up to save score", "success", "login");
+        }
         reload();
     }
 
@@ -94,11 +92,18 @@ class Auth {
 
         $_SESSION['username'] = $user->username;
         $_SESSION['loggedIn'] = true;
+
+        if (isset($_SESSION['saveScore']) && $_SESSION['saveScore'] == true) {
+            $timeTaken = $_SESSION['endTime'] - $_SESSION['startTime'];
+            $this->game->saveScore($timeTaken);
+            $_SESSION['saveScore'] = false;
+        }
     }
 
     public function handleLogout() {
         $_SESSION['loggedIn'] = false;
         unset($_SESSION['userId']);
+        unset($_SESSION['username']);
 
         reload();
     }

@@ -75,8 +75,8 @@ class Controller {
                     case 'logout':
                         $this->auth->handleLogout();
                         break;
-                    case 'loginSaveScore':
-                        $this->auth->handleLoginSaveScore();
+                    case 'saveScore':
+                        $this->auth->handleSaveScore();
                         break;
                 }
             }
