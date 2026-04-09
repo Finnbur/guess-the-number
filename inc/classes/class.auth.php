@@ -2,8 +2,11 @@
 
 class Auth {
     private $db;
-    public function __construct($db) {
+    private $game;
+
+    public function __construct($db, $game) {
         $this->db = $db;
+        $this->game = $game;
     }
 
     public function handleLogin() {
@@ -25,12 +28,21 @@ class Auth {
             if (password_verify($password, $row['password'])) {
                 $this->loginUser($row['id']);
 
+                if ($_POST['action'] === 'loginSaveScore') {
+                    $timeTaken = $_SESSION['endTime'] - $_SESSION['startTime'];
+                    $this->game->saveScore($timeTaken);
+                }
+
                 reload();
             }
         }
-
         // If we get here, login failed
         respond("Wrong name or password", "danger", "login");
+        reload();
+    }
+
+    public function handleLoginSaveScore() {
+        $_SESSION['loginSaveScore'] = true;
         reload();
     }
 

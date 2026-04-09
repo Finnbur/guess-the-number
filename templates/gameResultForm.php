@@ -45,7 +45,17 @@ if($_SESSION['gameWon'] == true) {
         <button type="submit" name="action" value="reset" class="btn btn-secondary" formnovalidate>
             Reset Game
         </button>
+        <button type="submit" name="action" value="loginSaveScore" class="btn btn-warning" formnovalidate>
+            Login to save score
+        </button>
 
         <?php require_once 'partials/guessesList.php'; ?>
     </div>
 </form>
+<?php if(isset($_SESSION['loginSaveScore']) && $_SESSION['loginSaveScore'] == true): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        });
+    </script>
+<?php endif; ?>

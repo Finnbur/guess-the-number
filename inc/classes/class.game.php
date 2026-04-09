@@ -118,18 +118,22 @@ class Game {
         $_SESSION['score'] = $score;
         
         if($_SESSION['loggedIn']) {
-            $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, minNumber, maxNumber, added, userId, score) VALUES (:time, :guesses, :maxGuesses, :gameWon, :minNumber, :maxNumber, :added, :userId, :score)", [
+            $this->saveScore($timeTaken);
+        }
+    }
+
+    private function saveScore($timeTaken) {
+        $this->db->run("INSERT INTO scores (time, guesses, maxGuesses, gameWon, minNumber, maxNumber, added, userId, score) VALUES (:time, :guesses, :maxGuesses, :gameWon, :minNumber, :maxNumber, :added, :userId, :score)", [
                 ':time' => $timeTaken,
                 ':guesses' => count($_SESSION['guesses']),
                 ':maxGuesses' => $_SESSION['maxGuesses'],
-                ':gameWon' => $gameWon ? 1 : 0,
+                ':gameWon' => $_SESSION['gameWon'] ? 1 : 0,
                 ':minNumber' => $_SESSION['min'],
                 ':maxNumber' => $_SESSION['max'],
-                ':score' => $score,
+                ':score' => $_SESSION['score'],
                 ':added' => date('Y-m-d H:i:s'),
                 ':userId' => $_SESSION['userId']
             ]);
-        }
     }
 
     public function calculateScore($gameWon, $time, $guessesUsed, $maxGuesses) {
