@@ -24,9 +24,10 @@ class Game {
         $maxGuesses = $_POST['maxGuesses'];
         $timePerGuess = $_POST['timePerGuess'];
 
-        if ($min >= $max) {
-            return;
-        }
+        if ($min < 1) reload();
+        if ($timePerGuess < 1) reload();
+        if ($maxGuesses < 1) reload();
+        if ($min >= $max) reload();
 
         $_SESSION['startTime'] = time();
         $_SESSION['time'] = time();
@@ -47,6 +48,10 @@ class Game {
         $secret = $_SESSION['secretNumber'];
         $_SESSION['time'] = time();
 
+        if(count($_SESSION['guesses']) >= ($_SESSION['maxGuesses'] - 1)) {
+            $this->gameEnd(false);
+        }
+
         if($guess < $secret) {
             respond("Your guess is TOO LOW", "primary", "game");
             $this->addGuess($guess, "TOO LOW", "primary");
@@ -56,10 +61,6 @@ class Game {
         } else {
             $this->addGuess($guess, "WIN", "success");
             $this->gameEnd(true);
-        }
-
-        if(count($_SESSION['guesses']) >= $_SESSION['maxGuesses']) {
-            $this->gameEnd(false);
         }
 
         reload();
@@ -126,6 +127,15 @@ class Game {
                 ':added' => date('Y-m-d H:i:s'),
                 ':userId' => $_SESSION['userId']
             ]);
+    }
+
+    public function checkTimer() {
+        if (isset($_SESSION['time'], $_SESSION['timePerGuess'])) {
+            if ((time() - $_SESSION['time']) >= $_SESSION['timePerGuess']) {
+                $this->gameEnd(false);
+                reload();
+            }
+        }
     }
 
     public function calculateScore($gameWon, $time, $guessesUsed, $maxGuesses) {

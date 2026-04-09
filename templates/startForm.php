@@ -18,7 +18,7 @@
     <div class="d-flex gap-2 mb-2">
         <div class="mb-3 flex-fill">
             <label for="maxGuesses" class="form-label">Maximum Guesses</label>
-            <input type="number" class="form-control " name="maxGuesses" min="2" value="<?php echo $_SESSION['maxGuesses'] ?>" required>
+            <input type="number" class="form-control " name="maxGuesses" min="1" value="<?php echo $_SESSION['maxGuesses'] ?>" required>
         </div>
 
         <div class="mb-3 flex-fill">

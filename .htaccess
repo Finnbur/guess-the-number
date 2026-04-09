@@ -8,6 +8,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)/$ /$1 [R=301,L]
 
 # Pretty URLs
+RewriteRule ^game/basic/?$ index.php?page=game&game=basic [L,QSA]
+RewriteRule ^game/rush/?$ index.php?page=game&game=rush [L,QSA]
 RewriteRule ^leaderboard/?$ index.php?page=leaderboard [L,QSA]
 RewriteRule ^profile/?$ index.php?page=profile [L,QSA]
 RewriteRule ^profile/([a-zA-Z0-9_-]+)/?$ index.php?page=profile&user=$1 [L,QSA]

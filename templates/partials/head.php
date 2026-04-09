@@ -12,13 +12,13 @@
 <header class="p-3 bg-dark text-white">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/guess-the-number/" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+            <a href="/guess-the-number/game/basic" class="d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
                 <img width="48" height="48" src="https://img.icons8.com/?size=100&id=116653&format=png&color=FFFFFF" alt="2-circle"/>
             </a>
 
             <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-1">
-                <li><a href="/guess-the-number/" class="nav-link px-2 text-white">Home</a></li>
-                <li><a href="leaderboard" class="nav-link px-2 text-white">Leaderboard</a></li>
+                <li><a href="/guess-the-number/game/basic" class="nav-link px-2 text-white">Home</a></li>
+                <li><a href="/guess-the-number/leaderboard" class="nav-link px-2 text-white">Leaderboard</a></li>
             </ul>
 
             <div class="text-end">
@@ -30,7 +30,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="dropdown" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $_SESSION['username']; ?></a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown">
-                                <li><a class="dropdown-item" href="profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/guess-the-number/profile">Profile</a></li>
                                 <li>
                                     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                         <button type="submit" name="action" value="logout" class="dropdown-item">Logout</button>

@@ -42,7 +42,7 @@ class Controller {
             require_once 'templates/startForm.php';
         } else {
             if(!isset($_SESSION['gameWon'])) {
-                $this->checkTimer();
+                $this->game->checkTimer();
                 require_once 'templates/gameForm.php';
             } else {
                 require_once 'templates/gameResultForm.php';
@@ -79,14 +79,6 @@ class Controller {
                         $this->auth->handleSaveScore();
                         break;
                 }
-            }
-        }
-    }
-
-    public function checkTimer() {
-        if (isset($_SESSION['time'], $_SESSION['timePerGuess'])) {
-            if (time() - $_SESSION['time'] >= $_SESSION['timePerGuess']) {
-                $this->game->gameEnd(false);
             }
         }
     }
