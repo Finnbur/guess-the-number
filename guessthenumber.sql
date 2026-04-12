@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2026 at 12:49 AM
+-- Generation Time: Apr 12, 2026 at 11:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -36,6 +36,7 @@ CREATE TABLE `scores` (
   `minNumber` int(11) NOT NULL,
   `maxNumber` int(11) NOT NULL,
   `score` int(11) NOT NULL,
+  `gamemode` varchar(5) NOT NULL,
   `added` datetime NOT NULL,
   `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -44,10 +45,14 @@ CREATE TABLE `scores` (
 -- Dumping data for table `scores`
 --
 
-INSERT INTO `scores` (`id`, `time`, `guesses`, `maxGuesses`, `gameWon`, `minNumber`, `maxNumber`, `score`, `added`, `userId`) VALUES
-(40, 2, 2, 5, 1, 1, 10, 1008, '0000-00-00 00:00:00', 5),
-(41, 2, 1, 5, 1, 1, 2, 766, '2026-04-03 01:45:34', 5),
-(42, 2, 2, 2, 0, 1, 1000, 0, '2026-04-03 01:54:03', 5);
+INSERT INTO `scores` (`id`, `time`, `guesses`, `maxGuesses`, `gameWon`, `minNumber`, `maxNumber`, `score`, `gamemode`, `added`, `userId`) VALUES
+(123, 15, 4, 10, 0, 1, 100, 0, 'rush', '2026-04-12 23:22:44', 1),
+(124, 15, 6, 10, 1, 1, 100, 1141, 'rush', '2026-04-12 23:29:35', 1),
+(125, 15, 0, 10, 1, 1, 100, 1381, 'rush', '2026-04-12 23:30:29', 1),
+(126, 6, 0, 10, 1, 1, 100, 0, 'rush', '2026-04-12 23:32:10', 1),
+(127, 15, 5, 10, 1, 1, 100, 0, 'rush', '2026-04-12 23:32:31', 1),
+(128, 15, 8, 10, 1, 1, 100, 550, 'rush', '2026-04-12 23:33:27', 1),
+(129, 6, 0, 1, 1, 1, 10, 0, 'rush', '2026-04-12 23:43:43', 1);
 
 -- --------------------------------------------------------
 
@@ -95,7 +100,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `scores`
 --
 ALTER TABLE `scores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT for table `users`

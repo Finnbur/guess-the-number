@@ -20,6 +20,7 @@ $scores = $Db->run("SELECT s.*, u.username
                 <th scope="col">Time</th>
                 <th scope="col">Guesses</th>
                 <th scope="col">Between</th>
+                <th scope="col">Gamemode</th>
                 <th scope="col">Result</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@ $scores = $Db->run("SELECT s.*, u.username
                     <td><?php echo $score->time; ?></td>
                     <td><?php echo $score->guesses; ?>/<?php echo $score->maxGuesses; ?></td>
                     <td><?php echo $score->minNumber; ?>/<?php echo $score->maxNumber; ?></td>
+                    <td><?php echo $score->gamemode; ?></td>
                     <td><?php echo $score->gameWon ? "Won" : "Lost" ?></td>
                 </tr>
             <?php endforeach; ?>

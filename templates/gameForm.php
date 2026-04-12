@@ -1,7 +1,7 @@
 <?php
-$remaining = $_SESSION['timePerGuess'] - (time() - $_SESSION['time']);
-$remaining = max(0, min($_SESSION['timePerGuess'], $remaining));
-$percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
+$remaining = $_SESSION['gameTime'] - (time() - $_SESSION['time']);
+$remaining = max(0, min($_SESSION['gameTime'], $remaining));
+$percentage = ($remaining / $_SESSION['gameTime']) * 100;
 ?>
 
 <h3 class="mb-4">
@@ -74,7 +74,7 @@ $percentage = ($remaining / $_SESSION['timePerGuess']) * 100;
 
     <?php require_once 'partials/guessesList.php'; ?>
     <script>
-        let totalTime = <?php echo $_SESSION['timePerGuess']; ?>;
+        let totalTime = <?php echo $_SESSION['gameTime']; ?>;
         let remaining = <?php echo $remaining; ?>;
     </script>
 </form>
